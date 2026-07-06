@@ -24,7 +24,7 @@ metadata:
    environment: dev
    tier: backend
    component: cart
- spec:
+spec:
   replicas: 1
   selector:
     matchlabels:

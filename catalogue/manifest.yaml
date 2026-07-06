@@ -23,7 +23,7 @@ metadata:
    environment: dev
    tier: backend
    component: catalogue
- spec:
+spec:
   replicas: 1
   selector:
     matchlabels:
