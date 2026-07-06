@@ -27,7 +27,7 @@ metadata:
  spec:
   replicas: 1
   selector:
-    matchlabels:
+    matchLabels:
       app: roboshop
       environment: dev
       tier: backend
@@ -40,7 +40,7 @@ metadata:
         tier: backend
         component: shipping
     spec:
-     container:
+     containers:
       - name: shipping
         image: manjukarri/shipping:1.0.0
         imagePullPolicy: Always

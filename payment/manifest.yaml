@@ -31,7 +31,7 @@ metadata:
  spec:
   replicas: 1
   selector:
-    matchlabels:
+    matchLabels:
       app: roboshop
       environment: dev
       tier: backend
@@ -44,7 +44,7 @@ metadata:
         tier: backend
         component: payment
     spec:
-     container:
+     containers:
       - name: payment
         image: manjukarri/payment:1.0.0
         imagePullPolicy: Always

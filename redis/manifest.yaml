@@ -11,7 +11,7 @@ metadata:
  spec:
   replicas: 1
   selector:
-    matchlabels:
+    matchLabels:
       app: roboshop
       environment: dev
       tier: db
@@ -24,7 +24,7 @@ metadata:
         tier: db
         component: redis
     spec:
-     container:
+     containers:
       - name: redis
         image: redis:7.0
 ---

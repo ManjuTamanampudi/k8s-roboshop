@@ -26,7 +26,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchlabels:
+    matchLabels:
       app: roboshop
       environment: dev
       tier: backend
@@ -39,7 +39,7 @@ template:
         tier: backend
         component: catalogue
     spec:
-     container:
+     containers:
       - name: catalogue
         image: manjukarri/catalogue:1.0.0
         imagePullPolicy: Always
