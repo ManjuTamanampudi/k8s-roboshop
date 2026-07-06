@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: catalogue
+ namespace: roboshop
+ labels:
+   app: roboshop
+   environment: dev
+   tier: backend
+   component: catalogue
+data:
+  MONGO: "true"
+  MONGO_URL: "mongodb://mongodb:27017/catalogue"
+    
+---
+apiVersion: app/v1
+kind: Deployment
+metadata: 
+ name: catalogue
+ namespace: roboshop
+ labels:
+   app: roboshop
+   environment: dev
+   tier: backend
+   component: catalogue
+ spec:
+  replicas: 1
+  selector:
+    matchlabels:
+      app: roboshop
+      environment: dev
+      tier: backend
+      component: catalogue  
+  template:
+    metadata:
+      labels:
+        app: roboshop
+        environment: dev
+        tier: backend
+        component: catalogue
+    spec:
+     container:
+      - name: catalogue
+        image: manjukarri/catalogue:1.0.0
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          periodSeconds: 10
+          initialDelaySeconds: 15
+          failureThreshold: 2
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080          
+          periodSeconds: 10
+          failureThreshold: 2
+        envfrom:
+          - configMapRef:
+              name: catalogue
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalogue
+  namespace: roboshop
+  labels:
+    app: roboshop
+    environment: dev
+    tier: backend
+    component: catalogue 
+spec:
+  type: ClusterIP
+  selector:
+    app: roboshop
+    environment: dev
+    tier: backend
+    component: catalogue 
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080           

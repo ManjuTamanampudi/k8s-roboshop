@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: cart
+ namespace: roboshop
+ labels:
+   app: roboshop
+   environment: dev
+   tier: backend
+   component: cart
+data:
+  MONGO: "true"
+  CATALOGUE_HOST: "catalogue"
+  CATALOGUE_PORT: "8080"
+    
+---
+apiVersion: app/v1
+kind: Deployment
+metadata: 
+ name: cart
+ namespace: roboshop
+ labels:
+   app: roboshop
+   environment: dev
+   tier: backend
+   component: cart
+ spec:
+  replicas: 1
+  selector:
+    matchlabels:
+      app: roboshop
+      environment: dev
+      tier: backend
+      component: cart  
+  template:
+    metadata:
+      labels:
+        app: roboshop
+        environment: dev
+        tier: backend
+        component: cart
+    spec:
+     container:
+      - name: cart
+        image: manjukarri/cart:1.0.0
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          periodSeconds: 10
+          initialDelaySeconds: 15
+          failureThreshold: 2
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080          
+          periodSeconds: 10
+          failureThreshold: 2
+        envfrom:
+          - configMapRef:
+              name: cart
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart
+  namespace: roboshop
+  labels:
+    app: roboshop
+    environment: dev
+    tier: backend
+    component: cart 
+spec:
+  type: ClusterIP
+  selector:
+    app: roboshop
+    environment: dev
+    tier: backend
+    component: cart 
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080           
