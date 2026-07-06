@@ -1,0 +1,11 @@
+apiVersion: app/v1
+kind: Pod
+metadata:
+ name: debug
+ namespace: roboshop
+spec:
+ containers:
+ - name: debug
+   image: manjukarri.debug:1.0.0
+   ports:
+   - containerPort: 80
