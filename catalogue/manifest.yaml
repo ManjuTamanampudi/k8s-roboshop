@@ -31,7 +31,7 @@ spec:
       environment: dev
       tier: backend
       component: catalogue  
-template:
+  template:
     metadata:
       labels:
         app: roboshop
