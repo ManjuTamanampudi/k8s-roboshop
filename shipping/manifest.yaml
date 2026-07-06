@@ -69,7 +69,7 @@ metadata:
             port: 8080 
           failureThreshold: 20
           periodSeconds: 10
-        envfrom:
+        envFrom:
           - configMapRef:
               name: shipping
 ---

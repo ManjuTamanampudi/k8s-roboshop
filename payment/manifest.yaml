@@ -67,7 +67,7 @@ metadata:
             port: 8080          
           periodSeconds: 10
           failureThreshold: 2
-        envfrom:
+        envFrom:
           - configMapRef:
               name: payment
 ---
