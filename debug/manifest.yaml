@@ -6,6 +6,6 @@ metadata:
 spec:
  containers:
  - name: debug
-   image: manjukarri.debug:1.0.0
+   image: manjukarri/debug:1.0.0
    ports:
    - containerPort: 80
