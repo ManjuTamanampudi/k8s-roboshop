@@ -8,7 +8,7 @@ metadata:
    environment: dev
    tier: db
    component: rabbitmq
- spec:
+spec:
   replicas: 1
   selector:
     matchLabels:
