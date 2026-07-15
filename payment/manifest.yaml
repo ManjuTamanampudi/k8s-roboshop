@@ -28,7 +28,7 @@ metadata:
    environment: dev
    tier: backend
    component: payment
- spec:
+spec:
   replicas: 1
   selector:
     matchLabels:

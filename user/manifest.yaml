@@ -27,7 +27,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchlabels:
+    matchLabels:
       app: roboshop
       environment: dev
       tier: backend

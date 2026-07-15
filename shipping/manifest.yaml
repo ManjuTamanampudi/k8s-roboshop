@@ -24,7 +24,7 @@ metadata:
    environment: dev
    tier: backend
    component: shipping
- spec:
+spec:
   replicas: 1
   selector:
     matchLabels:
