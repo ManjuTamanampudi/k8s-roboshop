@@ -40,7 +40,7 @@ spec:
         tier: backend
         component: user
     spec:
-     container:
+     containers:
       - name: user
         image: manjukarri/user:1.0.0
         imagePullPolicy: Always
